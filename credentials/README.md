@@ -6,7 +6,7 @@ File: `algorithmia.json`
 
 ```
 {
-    "apiKey": "simu61VrJkSqKri7swfkWpZN6+S1"
+    "apiKey": "simu54661VrJkS2qKri7ssf9wfpZN6+S1"
 }
 ```
 
