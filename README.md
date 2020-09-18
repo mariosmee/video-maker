@@ -52,3 +52,11 @@ https://imagemagick.org/index.php
 https://www.npmjs.com/package/gm
     GraphicsMagick and ImageMagick for node
 
+---
+Used intead of After Effects to make the slideshow
+
+# npm videoshow
+https://www.npmjs.com/package/videoshow
+    Simple utility for node/io.js to create straightforward video slideshows based on images using ffmpeg, with additional features such as audio, subtitles and fade in/out transitions between slides.
+
+---
