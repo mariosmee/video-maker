@@ -9,16 +9,12 @@ const robots = {
 }
 
 async function start() {
-    // robots.imput()
-    // await robots.text()
-    // await robots.image()
-    // await robots.video()
-    // await robots.videoRender()
+    robots.imput()
+    await robots.text()
+    await robots.image()
+    await robots.video()
+    await robots.videoRender()
     await robots.youtube()
-
-    // const content = robots.state.load()
-    // console.dir(content, { depth: null})
-
 }
 
 start();
