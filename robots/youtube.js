@@ -7,6 +7,7 @@ const fs = require('fs')
 const { firebasedynamiclinks } = require('googleapis/build/src/apis/firebasedynamiclinks')
 
 async function robot() {
+    console.log('> [youtube-robot] Starting...')
     const content = state.load()
 
 
@@ -29,7 +30,7 @@ async function robot() {
                 const app = express()
 
                 const server = app.listen(port, () => {
-                    console.log(`> Listening on http://localhost:${port}`)
+                    console.log(`> [youtube-robot] Listening on http://localhost:${port}`)
 
                     resolve({
                         app,
@@ -55,16 +56,16 @@ async function robot() {
                 access_type: 'offline',
                 scope: ['https://www.googleapis.com/auth/youtube']
             })
-            console.log(`> Please give your consent: ${consentUrl}`)
+            console.log(`> [youtube-robot] Please give your consent: ${consentUrl}`)
         }
 
         async function waitForGoogleCallBack(webServer) {
             return new Promise((resolve, reject) => {
-                console.log('> Waiting for user consent...')
+                console.log('> [youtube-robot] Waiting for user consent...')
 
                 webServer.app.get('/oauth2callback', (req, res) => {
                     const authCode = req.query.code
-                    console.log(`> Consent given: ${authCode}`)
+                    console.log(`> [youtube-robot] Consent given: ${authCode}`)
 
                     res.send('<h1>Thank you!</h1><p>Now close this tab.</p>')
                     resolve(authCode)
@@ -79,7 +80,7 @@ async function robot() {
                         return reject(error)
                     }
 
-                    console.log('> Access tokens received:')
+                    console.log('> [youtube-robot] Access tokens received:')
                     console.log(tokens)
 
                     OAuthClient.setCredentials(tokens)
@@ -130,16 +131,17 @@ async function robot() {
             }
         }
 
+        console.log(`> [youtube-robot] Starting to upload the video to youtube`)
         const youtubeResponse = await youtube.videos.insert(requestParameters, {
             onUploadProgress: onUploadProgress
         })
 
-        console.log(`> Video available at: https://youtu.be/${youtubeResponse.data.id}`)
+        console.log(`> [youtube-robot] Video available at: https://youtu.be/${youtubeResponse.data.id}`)
         return youtubeResponse.data
 
         function onUploadProgress(event) {
             const progress = Math.round( (event.bytesRead / videoFileSize) * 100)
-            console.log(`> ${progress}% complete`)
+            console.log(`> [youtube-robot] ${progress}% complete`)
         }
     }
 
@@ -156,7 +158,7 @@ async function robot() {
         }
 
         const youtubeResponse = await youtube.thumbnails.set(requestParameters)
-        console.log('> Thumbnail uploaded.')
+        console.log('> [youtube-robot] Thumbnail uploaded.')
     }
 }
 
