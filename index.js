@@ -4,7 +4,8 @@ const robots = {
     state: require('./robots/state.js'),
     image: require('./robots/image.js'),
     video: require('./robots/video.js'),
-    videoRender: require('./robots/videoRender.js')
+    videoRender: require('./robots/videoRender.js'),
+    youtube: require('./robots/youtube.js')
 }
 
 async function start() {
@@ -13,10 +14,7 @@ async function start() {
     await robots.image()
     await robots.video()
     await robots.videoRender()
-
-    const content = robots.state.load()
-    console.dir(content, { depth: null})
-
+    await robots.youtube()
 }
 
 start();
